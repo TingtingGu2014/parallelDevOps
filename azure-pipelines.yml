@@ -14,7 +14,7 @@ resources:
 trigger:
 - master
 
-stage:
+steps:
 - task: SonarQubePrepare@4
   inputs:
     SonarQube: 'SonarqubeConnection'
