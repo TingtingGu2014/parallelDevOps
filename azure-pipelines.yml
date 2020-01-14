@@ -14,24 +14,15 @@ resources:
 trigger:
 - master
 
-stages:
-#First Stage on Ubuntu
-- stage: UbuntuQAEnvCheck
-  jobs:
-  - job: InlineScripts
+stage:
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'SonarqubeConnection'
+    scannerMode: 'MSBuild'
+    projectKey: 'tingting'
+    projectName: 'tingting'
 
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    steps:
-    - checkout: none
-    - script: echo Hello, world! = secr 000 ${SECRET}
-      displayName: 'Run a one-line script'
-
-    - script: |
-        echo Add other tasks to build, test, and deploy your project.
-        echo See https://aka.ms/yaml
-      displayName: 'Run a multi-line script'
+- task: SonarQubeAnalyze@4
 
 # #Second Stage on Ubuntu Prod
 # - stage: UbuntuProdEnvCheck
